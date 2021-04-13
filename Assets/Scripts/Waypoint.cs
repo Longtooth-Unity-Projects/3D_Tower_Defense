@@ -5,13 +5,26 @@ using UnityEngine.EventSystems;
 
 public class Waypoint : MonoBehaviour, IPointerDownHandler
 {
-    [SerializeField] bool isPlaceable = true;
+    [SerializeField] private bool isPlaceable = true;
+    public bool IsPlaceable    { get { return isPlaceable; } }
+
+
+    [SerializeField] private GameObject defenderPrefab;
+
+    private string containerName = "ContainerForRuntimeSpawns";
+    private GameObject container;
+
+    private void Start()
+    {
+        container = GameObject.Find(containerName);
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         if (isPlaceable)
         {
-            Debug.Log($"Pointer Down: {transform.name}");
+            Instantiate(defenderPrefab, transform.position, Quaternion.identity, container.transform);
+            isPlaceable = false;
         }
     }
 }

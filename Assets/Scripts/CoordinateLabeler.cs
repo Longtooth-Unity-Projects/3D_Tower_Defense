@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
+using UnityEngine.InputSystem;
 
 [ExecuteAlways]
 public class CoordinateLabeler : MonoBehaviour
 {
+    [SerializeField] private Color defaultColor = Color.black;
+    [SerializeField] private Color blockedColor = Color.red;
+
     private TextMeshPro coordinateLabel;
     private Vector2Int coordinates = new Vector2Int();
+    private Waypoint waypoint;
+
     private float tileSizeInWorldUnits;
 
     private void Awake()
     {
         coordinateLabel = GetComponent<TextMeshPro>();
+        coordinateLabel.enabled = false;
+
+        waypoint = GetComponentInParent<Waypoint>();
         tileSizeInWorldUnits = UnityEditor.EditorSnapSettings.move.x;
 
         //so coordinates are shown in play mode
@@ -28,6 +38,17 @@ public class CoordinateLabeler : MonoBehaviour
             DisplayCoordinates();
             UpdateTileName();
         }
+
+        ColorCoordinates();
+        ToggleLabels();
+    }
+
+    private void ColorCoordinates()
+    {
+        if (waypoint.IsPlaceable)
+            coordinateLabel.color = defaultColor;
+        else
+            coordinateLabel.color = blockedColor;
     }
 
     private void DisplayCoordinates()
@@ -41,5 +62,14 @@ public class CoordinateLabeler : MonoBehaviour
     private void UpdateTileName()
     {
         transform.parent.name = coordinates.ToString();
+    }
+
+    private void ToggleLabels()
+    {
+        //TODO change this to an input action map
+        if (Keyboard.current.cKey.wasPressedThisFrame)
+        {
+            coordinateLabel.enabled = !coordinateLabel.IsActive();
+        }
     }
 }

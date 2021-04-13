@@ -90,7 +90,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5781695370319528409}
+  - component: {fileID: 5955319527741843862}
   - component: {fileID: 6590848604806241120}
+  - component: {fileID: 3952843933595713748}
   m_Layer: 0
   m_Name: Enemy_Ram
   m_TagString: Untagged
@@ -113,6 +115,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5955319527741843862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6590848604806241123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8339e37f995f9a4db32562aee45b823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6590848604806241120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96bb1174f697d8d418b6c86edf5ef97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathStepDelay: 1
+  movementSpeed: 1
   path:
   - {fileID: 0}
   - {fileID: 0}
@@ -134,3 +148,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!65 &3952843933595713748
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6590848604806241123}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.329686, y: 4.3569765, z: 5.0710545}
+  m_Center: {x: -0.14651632, y: 2.3215117, z: -0.015767574}

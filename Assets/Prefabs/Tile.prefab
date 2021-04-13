@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlaceable: 1
+  defenderPrefab: {fileID: 3219458064393657486, guid: a72581ed6544b3b4488aa168455e8303, type: 3}
 --- !u!65 &7171359916616155102
 BoxCollider:
   m_ObjectHideFlags: 0
