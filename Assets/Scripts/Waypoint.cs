@@ -9,22 +9,15 @@ public class Waypoint : MonoBehaviour, IPointerDownHandler
     public bool IsPlaceable    { get { return isPlaceable; } }
 
 
-    [SerializeField] private GameObject defenderPrefab;
-
-    private string containerName = "ContainerForRuntimeSpawns";
-    private GameObject container;
-
-    private void Start()
-    {
-        container = GameObject.Find(containerName);
-    }
+    [SerializeField] private Defender defenderPrefab;
 
     public void OnPointerDown(PointerEventData eventData)
     {
         if (isPlaceable)
         {
-            Instantiate(defenderPrefab, transform.position, Quaternion.identity, container.transform);
-            isPlaceable = false;
+            bool isPlaced = defenderPrefab.SpawnDefender(defenderPrefab, transform.position);
+            // we want to make a tile nonplaceable if there is already a defender on it
+            isPlaceable = !isPlaced;
         }
     }
 }

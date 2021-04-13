@@ -90,6 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5781695370319528409}
+  - component: {fileID: 975370081790177164}
   - component: {fileID: 5955319527741843862}
   - component: {fileID: 6590848604806241120}
   - component: {fileID: 3952843933595713748}
@@ -115,6 +116,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &975370081790177164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6590848604806241123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 733a7621770888343b842d50f430d7ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5955319527741843862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8339e37f995f9a4db32562aee45b823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHitpoints: 5
+  currentHitpoints: 0
 --- !u!114 &6590848604806241120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,14 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1
-  path:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  path: []
 --- !u!65 &3952843933595713748
 BoxCollider:
   m_ObjectHideFlags: 0

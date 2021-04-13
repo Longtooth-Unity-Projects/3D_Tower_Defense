@@ -6,6 +6,7 @@ using System;
 using UnityEngine.InputSystem;
 
 [ExecuteAlways]
+[RequireComponent(typeof(TextMeshPro))]
 public class CoordinateLabeler : MonoBehaviour
 {
     [SerializeField] private Color defaultColor = Color.black;
@@ -37,13 +38,14 @@ public class CoordinateLabeler : MonoBehaviour
             //so coordinates are updated in edit mode
             DisplayCoordinates();
             UpdateTileName();
+            coordinateLabel.enabled = true;
         }
 
-        ColorCoordinates();
+        SetCoordinateLabelColor();
         ToggleLabels();
     }
 
-    private void ColorCoordinates()
+    private void SetCoordinateLabelColor()
     {
         if (waypoint.IsPlaceable)
             coordinateLabel.color = defaultColor;
