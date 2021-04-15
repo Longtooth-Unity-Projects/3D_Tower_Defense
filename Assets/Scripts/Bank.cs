@@ -8,8 +8,7 @@ public class Bank : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI goldDisplayTMP;
     [SerializeField] private int startingBalance = 500;
-    [SerializeField] private int currentBalance;    //TODO serialize for debugging purposes
-
+    [SerializeField] private int currentBalance;
     public int CurrentBalance { get { return currentBalance; } }
 
     private void Awake()

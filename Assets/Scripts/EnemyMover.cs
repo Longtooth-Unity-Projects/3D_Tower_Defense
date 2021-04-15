@@ -7,7 +7,7 @@ public class EnemyMover : MonoBehaviour
 {   
 
     [SerializeField] [Range(0.0f, 5.0f)] float movementSpeed = 1f;
-    [SerializeField] List<Waypoint> path = new List<Waypoint>();
+    [SerializeField] List<Tile> path = new List<Tile>();
 
     Enemy enemyMe;
     string pathTagName = "Path";
@@ -36,7 +36,7 @@ public class EnemyMover : MonoBehaviour
 
         foreach (Transform child in parent.transform)
         {
-            path.Add(child.GetComponent<Waypoint>());
+            path.Add(child.GetComponent<Tile>());
         }
     }
 
@@ -55,10 +55,10 @@ public class EnemyMover : MonoBehaviour
 
     private IEnumerator FollowPath()
     {
-        foreach (Waypoint waypoint in path)
+        foreach (Tile tile in path)
         {
             Vector3 startPos = transform.position;
-            Vector3 endPos = waypoint.transform.position;
+            Vector3 endPos = tile.transform.position;
             float travelPercent = 0;
 
             transform.LookAt(endPos);

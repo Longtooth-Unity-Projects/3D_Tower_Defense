@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     {
         if (bank == null) { return false; }
 
-        bank.Withdraw(goldReward);
+        bank.Withdraw(goldPenalty);
         return true;
     }
 }

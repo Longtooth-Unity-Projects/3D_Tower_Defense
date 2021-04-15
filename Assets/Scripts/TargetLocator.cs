@@ -8,7 +8,7 @@ public class TargetLocator : MonoBehaviour
     [SerializeField] private float weaponRange = 25.0f;
     [SerializeField] private ParticleSystem projectileParticles;
 
-    //TODO change this to be an enemy object
+    //TODO change this to be an enemy object instead of transform so we can access it easier
     private Transform target;
 
     void Update()

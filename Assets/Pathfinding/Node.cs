@@ -5,15 +5,15 @@ using UnityEngine;
 [System.Serializable]
 public class Node
 {
-    public Vector2Int m_coordinates;
-    public bool m_isWalkable;
-    public bool m_isExplored;
-    public bool m_isInPath;
-    public Node m_connectedTo;
+    public Vector2Int coordinates;
+    public bool isWalkable;
+    public bool isExplored;
+    public bool isInPath;
+    public Node connectedTo;
 
-    public Node(Vector2Int coordinates, bool isWalkable)
+    public Node(Vector2Int coordinates_, bool isWalkable_)
     {
-        m_coordinates = coordinates;
-        m_isWalkable = isWalkable;
+        this.coordinates = coordinates_;
+        this.isWalkable = isWalkable_;
     }
 }
