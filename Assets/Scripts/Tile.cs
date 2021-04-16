@@ -32,7 +32,7 @@ public class Tile : MonoBehaviour, IPointerDownHandler
             //TODO: bug this might need to be placed elswhere as the path is still going over these tiles that are not placeable
             //make tile that are not placeable correspond to blocked nodes in grid
             if (!isPlaceable)
-                gridManager.BlockNode(coordinates);
+                gridManager.BlockNodeWalkable(coordinates);
         }
     }
 
@@ -45,12 +45,14 @@ public class Tile : MonoBehaviour, IPointerDownHandler
         if(gridManager.GetNode(coordinates).isWalkable && !pathfinder.WillBlockPath(coordinates))
         {
             // we want to make a tile nonplaceable if when a defender is placed on it
-            bool isPlaced = defenderPrefab.SpawnDefender(defenderPrefab, transform.position);
-            isPlaceable = !isPlaced;
+            bool placementSuccessful = defenderPrefab.SpawnDefender(defenderPrefab, transform.position);
 
             //if we were unable to place a defender, then we should not block the tile
-            if(isPlaced)
-                gridManager.BlockNode(coordinates);
+            if(placementSuccessful)
+            {
+                gridManager.BlockNodeWalkable(coordinates);
+                pathfinder.BroadcastRecalculatePath();
+            }
         }
     }
 }

@@ -6,8 +6,17 @@ using UnityEngine;
 public class Defender : MonoBehaviour
 {
     [SerializeField] int defenderCost = 75;
+    [SerializeField] float buildDelay = 1f;
 
     private string containerName = "ContainerForRuntimeSpawns";
+
+
+    private void Start()
+    {
+        StartCoroutine(BuildDefender());
+    }
+
+
 
     public bool SpawnDefender(Defender defenderPrefab, Vector3 position)
     {
@@ -22,5 +31,27 @@ public class Defender : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private IEnumerator BuildDefender()
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+            foreach (Transform grandChild in child)
+            {
+                grandChild.gameObject.SetActive(false);
+            }
+        }
+
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+            yield return new WaitForSeconds(buildDelay);
+            foreach (Transform grandChild in child)
+            {
+                grandChild.gameObject.SetActive(true);
+            }
+        }
     }
 }

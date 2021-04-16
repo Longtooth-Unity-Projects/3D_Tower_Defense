@@ -18,6 +18,8 @@ public class CoordinateLabeler : MonoBehaviour
     private Vector2Int coordinates = new Vector2Int();
     private GridManager gridManager;
 
+    private bool gameRunning = true;
+
 
 
 
@@ -44,6 +46,7 @@ public class CoordinateLabeler : MonoBehaviour
 
         SetCoordinateLabelColor();
         ToggleLabels();
+        TogglePause();
     }
 
     private void DisplayCoordinates()
@@ -87,5 +90,19 @@ public class CoordinateLabeler : MonoBehaviour
         {
             coordinateLabel.enabled = !coordinateLabel.IsActive();
         }
+    }
+
+    private void TogglePause()
+    {
+        //TODO change this to an input action map
+        if (Keyboard.current.pKey.wasPressedThisFrame)
+        {
+            gameRunning = !gameRunning;
+        }
+
+        if(gameRunning)
+            Time.timeScale = 1;
+        else
+            Time.timeScale = 0;
     }
 }

@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// ORDER: needs to execute first
+
+
 public class GridManager : MonoBehaviour
 {
     //TODO change this to be dynamic based on the playing field size
@@ -23,7 +27,7 @@ public class GridManager : MonoBehaviour
 
 
 
-    public void BlockNode(Vector2Int coordinates)
+    public void BlockNodeWalkable(Vector2Int coordinates)
     {
         if (grid.ContainsKey(coordinates))
             grid[coordinates].isWalkable = false;

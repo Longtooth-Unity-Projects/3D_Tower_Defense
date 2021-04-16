@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// ORDER: dependent on GridManager executing first
+
+
 public class Pathfinder : MonoBehaviour
 {
-    [SerializeField] Vector2Int startCoordinates;
+    [SerializeField] Vector2Int initialStartCoordinates;
+    public Vector2Int StartCoordinates { get { return initialStartCoordinates; } }
+
     [SerializeField] Vector2Int destinationCoordinates;
+    public Vector2Int DestinationCoordinates { get { return destinationCoordinates; } }
 
     private Node startNode;
     private Node destinationNode;
@@ -27,23 +34,29 @@ public class Pathfinder : MonoBehaviour
         gridManager = FindObjectOfType<GridManager>();
 
         if (gridManager != null)
+        {
             grid = gridManager.Grid;
+            startNode = grid[initialStartCoordinates];
+            destinationNode = grid[destinationCoordinates];
+        }
     }
 
 
     void Start()
     {
-        startNode = grid[startCoordinates];
-        destinationNode = grid[destinationCoordinates];
-
         GetNewPath();
     }
 
 
     public List<Node> GetNewPath()
     {
+        return GetNewPath(initialStartCoordinates);
+    }
+
+    public List<Node> GetNewPath(Vector2Int startingCoordinates)
+    {
         gridManager.ResetNodes();
-        BreadthFirstSearch();
+        BreadthFirstSearch(startingCoordinates);
         return BuildPath();
     }
 
@@ -73,15 +86,20 @@ public class Pathfinder : MonoBehaviour
     }// end of ExploreNeighbors()
 
 
-    private void BreadthFirstSearch()
+    //TODO change this to be able to pass in destination node as well
+    private void BreadthFirstSearch(Vector2Int startingCoordinates)
     {
+        //ensures nodes are walkable for pathfinding but remain unplaceable for towers
+        startNode.isWalkable = true;
+        destinationNode.isWalkable = true;
+
         frontierNodes.Clear();
         reachedNodes.Clear();
 
         bool isRunning = true;
 
-        frontierNodes.Enqueue(startNode);
-        reachedNodes.Add(startNode.coordinates, startNode);
+        frontierNodes.Enqueue(grid[startingCoordinates]);
+        reachedNodes.Add(startingCoordinates, grid[startingCoordinates]);
 
         while(frontierNodes.Count > 0 && isRunning)
         {
@@ -135,6 +153,11 @@ public class Pathfinder : MonoBehaviour
         return false;
     }// end of WillBlockPath()
 
+    //TODO change this to traditional events because we don't like strings
+    public void BroadcastRecalculatePath()
+    {
+        BroadcastMessage("RecalculatePath", false, SendMessageOptions.DontRequireReceiver);
+    }
 
 
 }// end of class
